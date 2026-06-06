@@ -31,9 +31,25 @@ renderFilters() {
   const currentRatchet = ratchetSelect.value;
   const currentBit = bitSelect.value;
 
-  const blades =
-  Analysis.countBy(Analysis.data, '上蓋')
-    .map(([name, count]) => ({
+  const bladeMap = {};
+
+Analysis.data.forEach(r => {
+
+  const name =
+    (r.上蓋 || '').trim() ||
+    (r.英文 || '').trim();
+
+  if (!name) return;
+
+  bladeMap[name] =
+    (bladeMap[name] || 0) + 1;
+
+});
+
+const blades =
+  Object.entries(bladeMap)
+    .sort((a,b)=>b[1]-a[1])
+    .map(([name,count])=>({
       name,
       count
     }));
