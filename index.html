@@ -2,21 +2,27 @@
 <html lang="zh-Hant">
 <header class="top-header">
   <h1>陀螺 COMBOS</h1>
-</header>
-<body>
 <header class="top-header">
-<div class="title-area"><h1>陀螺 COMBOS</h1><span class="version">V3</span></div>
-<div id="recordCount">0 筆</div>
+  <h1>陀螺 COMBOS</h1>
 </header>
 <main>
 <section class="card" id="searchPanel">
-<input id="keyword" placeholder="搜尋 中文 / English / 固鎖 / 軸心">
+<div class="search-row">
+  <input id="keyword" placeholder="搜尋 中文 / English / 固鎖 / 軸心">
+
+  
+  <button id="clearSearchButton">✕</button>
+  
+</div>
 <div class="filters">
 <select id="bladeSelect"></select>
 <select id="ratchetSelect"></select>
 <select id="bitSelect"></select>
 </div>
-<button id="clearAllButton">清除全部</button>
+<div class="bottom-actions">
+  <button id="clearAllButton">清除全部</button>
+  <span id="recordCount">0 筆</span>
+</div>
 </section>
 <section class="card"><h2>熱門組合</h2><div id="topCombos"></div></section>
 <section class="card"><div class="ranking-grid">
