@@ -202,23 +202,41 @@ const key =
         const blade = parts[0];
         const setup = parts.slice(1).join(' ');
 
-        return `
-          <div style="
-            padding:2px 0;
-            font-size:14px;
-            text-align:right;
-          ">
-            ${idx + 1}.
-            <span style="
-              color:#d32f2f;
-              font-weight:bold;
-            ">
-              ${blade}
-            </span>
-            ${setup}
-            (${count}次)
-          </div>
-        `;
+return `
+<div style="
+  display:grid;
+  grid-template-columns: 1.8fr 1fr 1fr;
+  align-items:center;
+  padding:4px 0;
+  font-size:14px;
+">
+
+  <div style="
+    text-align:left;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+  ">
+    ${idx + 1}. ${blade}
+  </div>
+
+  <div style="
+    text-align:center;
+    color:#0b3d91;
+    font-weight:bold;
+  ">
+    ${setup}
+  </div>
+
+  <div style="
+    text-align:right;
+    color:#666;
+  ">
+    ${count}次
+  </div>
+
+</div>
+`;
       })
       .join('');
 
