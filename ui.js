@@ -25,7 +25,10 @@ renderFilters() {
   const ratchetSelect = document.getElementById('ratchetSelect');
   const bitSelect = document.getElementById('bitSelect');
 
-  if (!bladeSelect.dataset.loaded) {
+ if (
+  !bladeSelect.dataset.loaded ||
+  bladeSelect.options.length <= 1
+) {
 
     const blades =
       Analysis.countBy(Analysis.data,'上蓋')
@@ -43,8 +46,10 @@ renderFilters() {
     bladeSelect.dataset.loaded = '1';
   }
 
-  if (!ratchetSelect.dataset.loaded) {
-
+ if (
+  !ratchetSelect.dataset.loaded ||
+  ratchetSelect.options.length <= 1
+) {
     const ratchets =
       [...new Set(
         Analysis.data
@@ -71,7 +76,10 @@ renderFilters() {
     ratchetSelect.dataset.loaded='1';
   }
 
-  if (!bitSelect.dataset.loaded) {
+if (
+  !bitSelect.dataset.loaded ||
+  bitSelect.options.length <= 1
+) {
 
     const bits =
       Analysis.countBy(Analysis.data,'軸')
