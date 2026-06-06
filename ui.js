@@ -13,6 +13,7 @@ render() {
 
   document.getElementById('recordCount').textContent =
     `${rows.length} 筆`;
+
   this.renderTopCombos(rows);
   this.renderRankings(rows);
   this.renderResults(rows);
@@ -58,6 +59,7 @@ renderFilters() {
         if(a1!==b1) return a1-b1;
 
         return a2-b2;
+
       });
 
     ratchetSelect.innerHTML =
@@ -86,7 +88,6 @@ renderFilters() {
 
 },
 
-
 renderTopCombos(rows){
 
   const map = {};
@@ -96,22 +97,23 @@ renderTopCombos(rows){
     const key =
       `${r.上蓋} ${r.固鎖}${r.軸}`;
 
-    map[key] = (map[key]||0)+1;
+    map[key] = (map[key] || 0) + 1;
+
   });
 
   const html =
     Object.entries(map)
-    .sort((a,b)=>b[1]-a[1])
-    .slice(0,3)
-    .map(([combo,count],idx)=>
-      `<div style="padding:4px 0">
-        ${idx+1}. ${combo}
-        <span style="float:right">
-          ${count} 次得獎
-        </span>
-      </div>`
-    )
-    .join('');
+      .sort((a,b)=>b[1]-a[1])
+      .slice(0,3)
+      .map(([combo,count],idx)=>
+        `<div style="padding:4px 0">
+          ${idx+1}. ${combo}
+          <span style="float:right">
+            ${count} 次得獎
+          </span>
+        </div>`
+      )
+      .join('');
 
   document.getElementById('topCombos').innerHTML =
     html || '無資料';
@@ -167,6 +169,7 @@ renderRankings(rows){
   renderRanking('bladeRanking','上蓋');
   renderRanking('ratchetRanking','固鎖');
   renderRanking('bitRanking','軸');
+
 },
 
 renderResults(rows){
@@ -176,22 +179,25 @@ renderResults(rows){
 
       <div style="
         display:grid;
-        grid-template-columns:
-          1.8fr
-          120px
-          140px;
+        grid-template-columns:1fr 90px 70px;
         align-items:center;
         padding:8px 0;
         border-bottom:1px solid #eee;
       ">
 
-        <div>
+        <div style="
+          overflow:hidden;
+          white-space:nowrap;
+          text-overflow:ellipsis;
+        ">
           ${r.上蓋}
           ${r.英文 ? `(${r.英文})` : ''}
         </div>
 
         <div style="
-          text-align:center;
+          display:flex;
+          justify-content:center;
+          align-items:center;
           font-weight:bold;
           color:#0b3d91;
         ">
@@ -201,8 +207,13 @@ renderResults(rows){
         <div style="
           text-align:right;
         ">
-          ${r.名次 || ''}
-          ${r.日期 ? ' ' + r.日期 : ''}
+          ${
+            String(r.名次 || '')
+              .toUpperCase()
+              .includes('1')
+              ? '🏆'
+              : (r.名次 || '')
+          }
         </div>
 
       </div>
@@ -226,24 +237,40 @@ window.addEventListener('DOMContentLoaded',()=>{
   document.getElementById('bitSelect')
     .addEventListener('change',()=>UI.render());
 
+  document.getElementById('clearBlade')
+    .addEventListener('click',()=>{
+
+      document.getElementById('bladeSelect').value='';
+      UI.render();
+
+    });
+
+  document.getElementById('clearRatchet')
+    .addEventListener('click',()=>{
+
+      document.getElementById('ratchetSelect').value='';
+      UI.render();
+
+    });
+
+  document.getElementById('clearBit')
+    .addEventListener('click',()=>{
+
+      document.getElementById('bitSelect').value='';
+      UI.render();
+
+    });
+
   document.getElementById('clearAllButton')
     .addEventListener('click',()=>{
 
       document.getElementById('keyword').value='';
       document.getElementById('bladeSelect').value='';
       document.getElementById('ratchetSelect').value='';
-      
       document.getElementById('bitSelect').value='';
 
       UI.render();
 
-      document.getElementById('clearSearchButton')
-  .addEventListener('click',()=>{
-
-    document.getElementById('keyword').value='';
-    UI.render();
-
-  });
     });
 
 });
