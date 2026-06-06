@@ -183,7 +183,7 @@ renderResults(rows){
 
       <div style="
         display:grid;
-        grid-template-columns:2fr 90px 40px;
+        grid-template-columns:1fr 120px 1fr;
         align-items:center;
         padding:6px 0;
         border-bottom:1px solid #eee;
@@ -204,6 +204,7 @@ renderResults(rows){
           align-items:center;
           font-weight:bold;
           color:#0b3d91;
+          text-align:center;
         ">
           ${r.固鎖}${r.軸}
         </div>
@@ -276,5 +277,7 @@ window.addEventListener('DOMContentLoaded',()=>{
       UI.render();
 
     });
+
+  UI.render();
 
 });
