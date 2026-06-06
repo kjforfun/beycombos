@@ -86,52 +86,6 @@ renderFilters() {
 
 },
 
-renderSummary(rows){
-  return;
-}
-
-  const total = rows.length || 1;
-
-  const topBlade =
-    Analysis.countBy(rows,'上蓋')
-    .slice(0,3);
-
-  const topRatchet =
-    Analysis.countBy(rows,'固鎖')
-    .slice(0,3);
-
-  const topBit =
-    Analysis.countBy(rows,'軸')
-    .slice(0,3);
-
-  const makeBlock = arr =>
-    arr.map(([name,count],idx)=>
-      `<div>${idx+1}. ${name} ${(count/total*100).toFixed(1)}%</div>`
-    ).join('');
-
-  document.getElementById('summaryContent').innerHTML = `
-    <div style="
-      display:grid;
-      grid-template-columns:1fr 1fr 1fr;
-      gap:24px;
-    ">
-      <div>
-        <b>最熱門上蓋</b>
-        ${makeBlock(topBlade)}
-      </div>
-
-      <div>
-        <b>最熱門固鎖</b>
-        ${makeBlock(topRatchet)}
-      </div>
-
-      <div>
-        <b>最熱門軸心</b>
-        ${makeBlock(topBit)}
-      </div>
-    </div>
-  `;
-},
 
 renderTopCombos(rows){
 
