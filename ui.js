@@ -31,6 +31,26 @@ renderFilters() {
   const currentRatchet = ratchetSelect.value;
   const currentBit = bitSelect.value;
 
+const bladeFilteredRows =
+  Analysis.filter({
+    keyword: '',
+    blade: currentBlade || '',
+    ratchet: '',
+    bit: ''
+  });
+
+// A+B 決定 C(軸)
+
+const bladeRatchetFilteredRows =
+  Analysis.filter({
+    keyword: '',
+    blade: currentBlade || '',
+    ratchet: currentRatchet || '',
+    bit: ''
+  });
+
+  
+
 const bladeMap = {};
 
 Analysis.data.forEach(r => {
@@ -70,11 +90,11 @@ bladeSelect.innerHTML =
 
 
   const ratchets =
-    [...new Set(
-      Analysis.data
-        .map(r => r.固鎖)
-        .filter(Boolean)
-    )]
+  [...new Set(
+    bladeFilteredRows
+      .map(r => r.固鎖)
+      .filter(Boolean)
+  )]
     .sort((a, b) => {
 
       const [a1, a2] = String(a).split('-').map(Number);
@@ -92,9 +112,13 @@ bladeSelect.innerHTML =
       `<option value="${x}">${x}</option>`
     ).join('');
 
-  const bits =
-    Analysis.countBy(Analysis.data, '軸')
-      .map(([name]) => name);
+ const bits =
+  [...new Set(
+    bladeRatchetFilteredRows
+      .map(r => r.軸)
+      .filter(Boolean)
+  )]
+  .sort();
 
   bitSelect.innerHTML =
     '<option value="">全部軸心</option>' +
