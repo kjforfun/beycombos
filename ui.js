@@ -13,8 +13,6 @@ render() {
 
   document.getElementById('recordCount').textContent =
     `${rows.length} 筆`;
-
-  this.renderSummary(rows);
   this.renderTopCombos(rows);
   this.renderRankings(rows);
   this.renderResults(rows);
