@@ -2,6 +2,10 @@
   box-sizing:border-box;
 }
 
+html{
+  font-size:16px;
+}
+
 body{
   margin:0;
   padding:8px;
@@ -10,16 +14,17 @@ body{
     sans-serif;
   background:#f5f5f5;
   color:#222;
+  font-size:1rem;
 }
 
 .top-header{
   text-align:center;
-  padding:4px 0 8px 0;
+  padding:6px 0 10px 0;
 }
 
 .top-header h1{
   margin:0;
-  font-size:1.1rem;
+  font-size:1.5rem;
   font-weight:700;
 }
 
@@ -34,7 +39,7 @@ body{
 
 #keyword{
   width:100%;
-  height:42px;
+  height:44px;
   padding:0 12px;
   border:1px solid #ccc;
   border-radius:8px;
@@ -54,21 +59,23 @@ body{
 
 .filter-row select{
   flex:1;
-  height:40px;
+  min-width:0;
+  height:42px;
   border:1px solid #ccc;
   border-radius:8px;
   padding:0 8px;
-  font-size:15px;
+  font-size:16px;
 }
 
 .filter-row button{
   width:42px;
-  height:40px;
+  height:42px;
+  flex-shrink:0;
   border:none;
   border-radius:8px;
   background:#d32f2f;
   color:white;
-  font-size:16px;
+  font-size:18px;
 }
 
 .filter-double{
@@ -86,30 +93,31 @@ body{
 
 #clearAllButton{
   flex:1;
-  height:42px;
+  height:44px;
   border:none;
   border-radius:8px;
   background:#1976d2;
   color:white;
-  font-size:15px;
+  font-size:16px;
+  font-weight:600;
 }
 
 #recordCount{
-  min-width:60px;
+  min-width:70px;
   text-align:right;
-  font-size:.9rem;
+  font-size:1rem;
   color:#666;
 }
 
 h2{
   margin:0 0 8px 0;
-  font-size:1rem;
+  font-size:1.15rem;
   text-align:center;
 }
 
 h3{
   margin:0 0 6px 0;
-  font-size:.9rem;
+  font-size:1rem;
   text-align:center;
 }
 
@@ -117,8 +125,8 @@ h3{
 
 #topCombos{
   text-align:center;
-  line-height:1.4;
-  font-size:.9rem;
+  line-height:1.5;
+  font-size:1rem;
 }
 
 /* 上蓋 固鎖 軸心 */
@@ -134,7 +142,7 @@ h3{
 }
 
 .custom-ranking span{
-  font-size:.85rem;
+  font-size:1rem;
 }
 
 /* 排名條 */
@@ -154,8 +162,9 @@ h3{
   display:grid;
   grid-template-columns:2fr 90px 40px;
   align-items:center;
-  padding:6px 0;
+  padding:8px 0;
   border-bottom:1px solid #eee;
+  font-size:15px;
 }
 
 .result-name{
@@ -180,6 +189,10 @@ h3{
 
 @media (max-width:600px){
 
+  html{
+    font-size:18px;
+  }
+
   body{
     padding:6px;
   }
@@ -189,14 +202,24 @@ h3{
   }
 
   h2{
-    font-size:.95rem;
+    font-size:1.1rem;
   }
 
   h3{
-    font-size:.85rem;
+    font-size:1rem;
   }
 
   .custom-ranking{
     gap:4px;
+  }
+
+  select,
+  button,
+  input{
+    font-size:16px !important;
+  }
+
+  .result-row{
+    font-size:15px;
   }
 }
