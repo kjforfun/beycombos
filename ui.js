@@ -277,11 +277,13 @@ renderRankings(rows) {
             <div style="margin-bottom:8px">
 
               <div style="
-                display:flex;
-                justify-content:center;
-                gap:8px;
-                margin-bottom:2px;
-              ">
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:8px;
+  margin-bottom:2px;
+  white-space:nowrap;
+">
                 <span style="
                   color:#0b3d91;
                   font-weight:bold;
