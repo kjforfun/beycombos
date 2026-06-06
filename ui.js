@@ -91,7 +91,7 @@ renderFilters() {
       }));
 
   bladeSelect.innerHTML =
-    '<option value="">全部上蓋</option>' +
+    '<option value="">上蓋</option>' +
     blades.map(x =>
       `<option value="${x.name}">${x.name} (${x.count})</option>`
     ).join('');
@@ -119,7 +119,7 @@ renderFilters() {
     });
 
   ratchetSelect.innerHTML =
-    '<option value="">全部固鎖</option>' +
+    '<option value="">固鎖</option>' +
     ratchets.map(x =>
       `<option value="${x}">${x}</option>`
     ).join('');
@@ -135,7 +135,7 @@ renderFilters() {
     .sort();
 
   bitSelect.innerHTML =
-    '<option value="">全部軸心</option>' +
+    '<option value="">軸心</option>' +
     bits.map(x =>
       `<option value="${x}">${x}</option>`
     ).join('');
