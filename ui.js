@@ -210,7 +210,7 @@ rows.forEach(r => {
 
   const html =
     Object.entries(map)
-      .sort((a, b) => b[1] - a[1])
+      .sort((a, b) => b[1].total - a[1].total)
       .slice(0, 3)
       .map(([combo, count], idx) => {
 
