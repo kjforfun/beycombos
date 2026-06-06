@@ -232,9 +232,18 @@ window.addEventListener('DOMContentLoaded',()=>{
       document.getElementById('keyword').value='';
       document.getElementById('bladeSelect').value='';
       document.getElementById('ratchetSelect').value='';
+      
       document.getElementById('bitSelect').value='';
 
       UI.render();
+
+      document.getElementById('clearSearchButton')
+  .addEventListener('click',()=>{
+
+    document.getElementById('keyword').value='';
+    UI.render();
+
+  });
     });
 
 });
