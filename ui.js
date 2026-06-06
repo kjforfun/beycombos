@@ -219,7 +219,7 @@ rows.forEach(r => {
 return `
 <div style="
   display:grid;
-  grid-template-columns: 1.4fr 1.2fr 2fr;
+  grid-template-columns: 1.2fr 1.2fr 2fr;
   align-items:center;
   padding:4px 0;
   font-size:14px;
