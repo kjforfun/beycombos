@@ -125,7 +125,7 @@ renderRankings(rows){
 
     const html =
       Analysis.countBy(rows,key)
-      .slice(0,10)
+      .slice(0,3)
       .map(([name,count])=>{
 
         const pct =
