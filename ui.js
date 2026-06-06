@@ -241,9 +241,12 @@ return `
   font-weight:bold;
 ">
   ${setup}
-</div>
-
-
+<div style="
+  text-align:right;
+  color:#666;
+  white-space:nowrap;
+">
+  ${data.total}次(🏆${data.win}次)
 </div>
 
 </div>
