@@ -105,17 +105,30 @@ renderTopCombos(rows){
     Object.entries(map)
       .sort((a,b)=>b[1]-a[1])
       .slice(0,3)
-      .map(([combo,count],idx)=>
-        `
-        <div style="
-          padding:2px 0;
-          text-align:center;
-          font-size:14px;
-        ">
-          ${idx+1}. ${combo} (${count}次)
-        </div>
-        `
-      )
+      .map(([combo,count],idx)=>{
+
+  const parts = combo.split(' ');
+  const blade = parts[0];
+  const setup = parts.slice(1).join(' ');
+
+  return `
+    <div style="
+      padding:2px 0;
+      font-size:14px;
+      text-align:right;
+    ">
+      ${idx+1}.
+      <span style="
+        color:#d32f2f;
+        font-weight:bold;
+      ">
+        ${blade}
+      </span>
+      ${setup}
+      (${count}次)
+    </div>
+  `;
+})
       .join('');
 
   document.getElementById('topCombos').innerHTML =
@@ -145,8 +158,19 @@ renderRankings(rows){
               gap:8px;
               margin-bottom:2px;
             ">
-              <span>${name}</span>
-              <span>${pct}%</span>
+              <span style="
+  color:#0b3d91;
+  font-weight:bold;
+">
+  ${name}
+</span>
+
+<span style="
+  color:#000;
+  font-size:12px;
+">
+  ${pct}%
+</span>
             </div>
 
             <div style="
