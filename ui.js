@@ -32,11 +32,17 @@ renderFilters() {
   const currentBit = bitSelect.value;
 
   const blades =
-    Analysis.countBy(Analysis.data, '上蓋')
-      .map(([name, count]) => ({
-        name,
-        count
-      }));
+  Analysis.countBy(Analysis.data, '上蓋')
+    .map(([name, count]) => ({
+      name,
+      count
+    }));
+
+bladeSelect.innerHTML =
+  '<option value="">全部上蓋</option>' +
+  blades.map(x =>
+    `<option value="${x.name}">${x.name} (${x.count})</option>`
+  ).join('');
 
   bladeSelect.innerHTML =
     '<option value="">全部上蓋</option>' +
