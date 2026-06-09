@@ -1,225 +1,370 @@
-*{
-  box-sizing:border-box;
+/* ===============================
+   Comboss / 陀螺 COMBOS
+   Mobile First CSS
+   =============================== */
+
+:root {
+  --bg: #eef2f5;
+  --card: #ffffff;
+  --header: #1f2937;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --blue: #2563eb;
+  --blue-dark: #1d4ed8;
+  --green: #00695c;
+  --light: #f3f4f6;
+  --shadow: 0 2px 10px rgba(0,0,0,.08);
+  --radius: 12px;
 }
 
-html{
-  font-size:20px;
+* {
+  box-sizing: border-box;
 }
 
-body{
-  margin:0;
-  padding:8px;
-  font-family:
-    "Microsoft JhengHei",
-    sans-serif;
-  background:#f5f5f5;
-  color:#222;
-  font-size:1rem;
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+  font-size: 15px;
 }
 
-.top-header{
-  text-align:center;
-  padding:6px 0 10px 0;
+/* ===============================
+   Header
+   =============================== */
+
+.top-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--header);
+  color: #fff;
+  box-shadow: var(--shadow);
 }
 
-.top-header h1{
-  margin:0;
-  font-size:1.5rem;
-  font-weight:700;
+.top-header h1 {
+  margin: 0;
+  font-size: 18px;
+  letter-spacing: .5px;
 }
 
-.card{
-  background:#fff;
-  border-radius:10px;
-  padding:10px;
-  margin-bottom:8px;
-  box-shadow:
-    0 1px 3px rgba(0,0,0,.08);
+/* ===============================
+   Layout
+   =============================== */
+
+main {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 10px;
 }
 
-#keyword{
-  width:100%;
-  height:44px;
-  padding:0 12px;
-  border:1px solid #ccc;
-  border-radius:8px;
-  font-size:16px;
-  margin-bottom:8px;
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 10px;
+  margin-bottom: 10px;
 }
 
-.filters{
-  width:100%;
+.card h2 {
+  margin: 0 0 8px;
+  font-size: 16px;
 }
 
-.filter-row{
-  display:flex;
-  gap:6px;
-  margin-bottom:6px;
+.card h3 {
+  margin: 0 0 6px;
+  font-size: 13px;
+  color: var(--muted);
 }
 
-.filter-row select{
-  flex:1;
-  min-width:0;
-  height:42px;
-  border:1px solid #ccc;
-  border-radius:8px;
-  padding:0 8px;
-  font-size:16px;
+/* ===============================
+   Filter Area
+   =============================== */
+
+#searchPanel {
+  position: sticky;
+  top: 46px;
+  z-index: 40;
 }
 
-.filter-row button{
-  width:42px;
-  height:42px;
-  flex-shrink:0;
-  border:none;
-  border-radius:8px;
-  background:#d32f2f;
-  color:white;
-  font-size:18px;
+.filters {
+  display: grid;
+  gap: 8px;
 }
 
-.filter-double{
-  display:grid;
-  grid-template-columns:2fr 1fr;
-  gap:6px;
+.filter-row {
+  display: grid;
+  grid-template-columns: 1fr 42px;
+  gap: 6px;
 }
 
-.bottom-actions{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  margin-top:6px;
+.filter-double {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
 }
 
-#clearAllButton{
-  flex:1;
-  height:44px;
-  border:none;
-  border-radius:8px;
-  background:#1976d2;
-  color:white;
-  font-size:16px;
-  font-weight:600;
+select,
+button {
+  font-family: inherit;
 }
 
-#recordCount{
-  min-width:70px;
-  text-align:right;
-  font-size:1rem;
-  color:#666;
+select {
+  width: 100%;
+  min-height: 40px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: #fff;
+  color: var(--text);
+  padding: 8px 10px;
+  font-size: 15px;
 }
 
-h2{
-  margin:0 0 8px 0;
-  font-size:1.15rem;
-  text-align:center;
+.filter-row button {
+  min-height: 40px;
+  border: 0;
+  border-radius: 9px;
+  background: #e5e7eb;
+  color: #374151;
+  font-size: 16px;
+  font-weight: bold;
 }
 
-h3{
-  margin:0 0 6px 0;
-  font-size:1rem;
-  text-align:center;
+/* ===============================
+   Place Filter Buttons
+   =============================== */
+
+.place-filter {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  margin-top: 10px;
 }
 
-/* 熱門組合 */
-
-#topCombos{
-  text-align:center;
-  line-height:1.5;
-  font-size:1rem;
+.place-btn {
+  min-height: 38px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--light);
+  color: #374151;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
 }
 
-/* 上蓋 固鎖 軸心 */
-
-.custom-ranking{
-  display:grid;
-  grid-template-columns:2fr 1fr 1fr;
-  gap:8px;
+.place-btn.active {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: #fff;
 }
 
-.custom-ranking > div{
-  text-align:center;
+.place-btn:active,
+.filter-row button:active,
+#clearAllButton:active {
+  transform: scale(.98);
 }
 
-.custom-ranking span{
-  font-size:1rem;
+/* ===============================
+   Bottom Actions
+   =============================== */
+
+.bottom-actions {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-items: center;
+  margin-top: 10px;
 }
 
-/* 排名條 */
-
-.custom-ranking .bar{
-  height:8px;
-  border-radius:4px;
+#clearAllButton {
+  min-height: 38px;
+  border: 0;
+  border-radius: 9px;
+  background: var(--blue);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
 }
 
-/* 賽果 */
-
-#resultList{
-  width:100%;
+#clearAllButton:hover {
+  background: var(--blue-dark);
 }
 
-.result-row{
-  display:grid;
-  grid-template-columns:2fr 90px 40px;
-  align-items:center;
-  padding:8px 0;
-  border-bottom:1px solid #eee;
-  font-size:15px;
+#recordCount {
+  color: var(--muted);
+  font-size: 14px;
+  white-space: nowrap;
 }
 
-.result-name{
-  overflow:hidden;
-  white-space:nowrap;
-  text-overflow:ellipsis;
+/* ===============================
+   Top Combos
+   =============================== */
+
+#topCombos {
+  display: grid;
+  gap: 6px;
 }
 
-.result-part{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-weight:bold;
-  color:#0b3d91;
+.top-combo,
+.combo-card {
+  display: grid;
+  grid-template-columns: 34px 1fr 82px 54px;
+  align-items: center;
+  gap: 6px;
+  padding: 8px;
+  border-radius: 9px;
+  background: #f9fafb;
+  border: 1px solid var(--border);
 }
 
-.result-rank{
-  text-align:center;
+.combo-rank {
+  font-weight: 800;
+  text-align: center;
 }
 
-/* 手機優化 */
+.combo-name {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-weight: 700;
+}
 
-@media (max-width:600px){
+.combo-build,
+.build {
+  color: var(--green);
+  font-weight: 800;
+  font-family: Consolas, "Courier New", monospace;
+  text-align: center;
+  letter-spacing: .2px;
+}
 
-  html{
-    font-size:18px;
+.combo-count {
+  text-align: right;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* ===============================
+   Rankings
+   =============================== */
+
+.ranking-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.custom-ranking > div {
+  min-width: 0;
+}
+
+.rank-item {
+  display: grid;
+  grid-template-columns: 16px 1fr;
+  gap: 3px;
+  align-items: center;
+  padding: 3px 0;
+  font-size: 12px;
+}
+
+.rank-name {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.rank-percent {
+  color: var(--green);
+  font-weight: 800;
+  font-size: 12px;
+}
+
+.rank-line {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+/* ===============================
+   Result List
+   =============================== */
+
+#resultList {
+  display: grid;
+  gap: 5px;
+}
+
+.result-row {
+  display: grid;
+  grid-template-columns: 42px minmax(0,1fr) 82px 52px;
+  gap: 6px;
+  align-items: center;
+  min-height: 36px;
+  padding: 7px 8px;
+  border-radius: 8px;
+  background: #fff;
+  border: 1px solid var(--border);
+}
+
+.place {
+  font-size: 13px;
+  font-weight: 800;
+  text-align: left;
+}
+
+.blade {
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-weight: 700;
+}
+
+.date {
+  text-align: right;
+  color: var(--muted);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+/* ===============================
+   Empty State
+   =============================== */
+
+.empty {
+  padding: 18px 8px;
+  text-align: center;
+  color: var(--muted);
+}
+
+/* ===============================
+   Larger Screen
+   =============================== */
+
+@media (min-width: 700px) {
+  main {
+    padding: 16px;
   }
 
-  body{
-    padding:6px;
+  .card {
+    padding: 14px;
   }
 
-  .card{
-    padding:8px;
+  .top-header {
+    height: 52px;
   }
 
-  h2{
-    font-size:1.1rem;
+  #searchPanel {
+    top: 52px;
   }
 
-  h3{
-    font-size:1rem;
-  }
-
-  .custom-ranking{
-    gap:4px;
-  }
-
-  select,
-  button,
-  input{
-    font-size:16px !important;
-  }
-
-  .result-row{
-    font-size:15px;
+  .top-header h1 {
+    font-size: 20px;
   }
 }
