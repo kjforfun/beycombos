@@ -126,19 +126,24 @@ renderFilters() {
 
   // ===== 軸 =====
 
-  const bits =
-    [...new Set(
-      rowsForBit
-        .map(r => r.軸)
-        .filter(Boolean)
-    )]
-    .sort();
+ const bitMap = {};
 
-  bitSelect.innerHTML =
-    '<option value="">軸心</option>' +
-    bits.map(x =>
-      `<option value="${x}">${x}</option>`
-    ).join('');
+rowsForBit.forEach(r => {
+  if (!r.軸) return;
+
+  bitMap[r.軸] =
+    (bitMap[r.軸] || 0) + 1;
+});
+
+const bits =
+  Object.entries(bitMap)
+    .sort((a, b) => b[1] - a[1]);
+
+bitSelect.innerHTML =
+  '<option value="">軸心</option>' +
+  bits.map(([bit, count]) =>
+    `<option value="${bit}">${bit} (${count})</option>`
+  ).join('');
 
   // ===== 恢復選擇 =====
 
