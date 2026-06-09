@@ -3,7 +3,19 @@ const Analysis = {
 data: [],
 
 init(data) {
-    this.data = data;
+    this.data = Array.isArray(data) ? data : [];
+},
+
+getBladeName(r) {
+    if (r.上蓋 && r.上蓋.trim()) {
+        return r.上蓋.trim();
+    }
+
+    if (r.英文 && r.英文.trim()) {
+        return `【待釐正】(${r.英文.trim()})`;
+    }
+
+    return '';
 },
 
 filter({
@@ -15,15 +27,9 @@ filter({
 
     return this.data.filter(r => {
 
-        const bladeMatch =
-            !blade ||
-            (
-                r.上蓋 && r.上蓋.trim()
-                    ? r.上蓋 === blade
-                    : `【待釐正】(${r.英文})` === blade
-            );
+        const bladeName = this.getBladeName(r);
 
-        return bladeMatch
+        return (!blade || bladeName === blade)
             && (!ratchet || r.固鎖 === ratchet)
             && (!bit || r.軸 === bit)
             && (!place || r.名次 === place);
@@ -38,7 +44,13 @@ countBy(rows, key) {
 
     rows.forEach(r => {
 
-        const value = r[key];
+        let value = '';
+
+        if (key === '上蓋') {
+            value = this.getBladeName(r);
+        } else {
+            value = r[key];
+        }
 
         if (!value) return;
 
@@ -52,29 +64,46 @@ countBy(rows, key) {
 },
 
 getBladeRanking(rows) {
-
     return this.countBy(rows, '上蓋');
-
 },
 
 getBitRanking(rows) {
-
     return this.countBy(rows, '軸');
-
 },
 
 getRatchetRanking(rows) {
 
-    const result = this.countBy(rows, '固鎖');
+    return this.countBy(rows, '固鎖')
+        .sort((a, b) => this.compareRatchet(a[0], b[0]));
 
-    return result.sort((a, b) => {
+},
 
-        const [a1, a2] = a[0].split('-').map(Number);
-        const [b1, b2] = b[0].split('-').map(Number);
+compareRatchet(a, b) {
 
-        return a1 - b1 || a2 - b2;
+    const pa = this.parseRatchet(a);
+    const pb = this.parseRatchet(b);
 
-    });
+    if (pa.main !== pb.main) return pa.main - pb.main;
+    return pa.height - pb.height;
+
+},
+
+parseRatchet(value) {
+
+    const text = String(value || '');
+    const match = text.match(/^(\d+)-(\d+)$/);
+
+    if (!match) {
+        return {
+            main: 999,
+            height: 999
+        };
+    }
+
+    return {
+        main: Number(match[1]),
+        height: Number(match[2])
+    };
 
 },
 
@@ -84,31 +113,39 @@ getTopCombos(rows, limit = 3) {
 
     rows.forEach(r => {
 
-        const blade =
-            r.上蓋 && r.上蓋.trim()
-                ? r.上蓋
-                : `【待釐正】(${r.英文})`;
+        const blade = this.getBladeName(r);
+        const ratchet = r.固鎖;
+        const bit = r.軸;
 
-        const key =
-            `${blade}|${r.固鎖}|${r.軸}`;
+        if (!blade || !ratchet || !bit) return;
+
+        const key = `${blade}|${ratchet}|${bit}`;
 
         if (!combos[key]) {
 
             combos[key] = {
                 blade,
-                ratchet: r.固鎖,
-                bit: r.軸,
-                count: 0
+                ratchet,
+                bit,
+                count: 0,
+                win: 0
             };
 
         }
 
         combos[key].count++;
 
+        if (String(r.名次 || '').toUpperCase().includes('1ST')) {
+            combos[key].win++;
+        }
+
     });
 
     return Object.values(combos)
-        .sort((a, b) => b.count - a.count)
+        .sort((a, b) => {
+            if (b.count !== a.count) return b.count - a.count;
+            return b.win - a.win;
+        })
         .slice(0, limit);
 
 },
@@ -140,10 +177,10 @@ getPlaceLabel(place) {
             return '🏆 冠軍';
 
         case '2nd':
-            return '🥈 第二';
+            return '2nd';
 
         case '3rd':
-            return '🥉 第三';
+            return '3rd';
 
         default:
             return '全部';
